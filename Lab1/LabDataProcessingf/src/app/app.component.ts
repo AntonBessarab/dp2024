@@ -8,7 +8,7 @@ import { Entity } from './interfaces/entity';
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  title = 'Lab_1f';
+  title = 'LabDataProcessingf';
   entityList: Entity[] = [];
 
   constructor(private service: Service1Service) { }
