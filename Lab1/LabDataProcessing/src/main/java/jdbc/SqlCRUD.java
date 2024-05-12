@@ -56,8 +56,7 @@ public class SqlCRUD implements LabCRUDInterface <User> {
     @Override
     public void update(int id, User user) {
         try(PreparedStatement st =
-                    connection.prepareStatement("UPDATE entity SET "
-                            +"\"name\"=?, \"age\"=? WHERE id=?;");){
+                    connection.prepareStatement("UPDATE entity SET \"name\"=?, \"age\"=? WHERE id=?;");){
             st.setString(1, user.getName());
             st.setInt(2, user.getAge());
             st.setInt(3, user.getId());
