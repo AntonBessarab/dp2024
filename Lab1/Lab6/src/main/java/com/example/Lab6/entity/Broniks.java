@@ -8,12 +8,13 @@ import lombok.Data;
 
 @Entity
 @Data
-public class MyEntity {
+public class Broniks {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     private String name;
-    private int age;
+    private String description;
+    private String img;
 }

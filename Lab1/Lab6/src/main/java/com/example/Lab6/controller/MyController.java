@@ -1,6 +1,6 @@
 package com.example.Lab6.controller;
 
-import com.example.Lab6.entity.MyEntity;
+import com.example.Lab6.entity.Broniks;
 import com.example.Lab6.repository.MyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,27 +18,31 @@ public class MyController {
 
     @PostMapping("/create")
     @ResponseStatus(HttpStatus.CREATED)
-    public MyEntity postEntity(@RequestBody MyEntity myEntity){
-        return myRepository.save(myEntity);
+    public Broniks postEntity(@RequestBody Broniks broniks) {
+        return myRepository.save(broniks);
     }
 
     @GetMapping("/retrieve")
-    public List<MyEntity> getEntities(){
+    public List<Broniks> getEntities() {
         return myRepository.findAll();
     }
 
     @PutMapping("/update/{id}")
-    public MyEntity putEntity(@PathVariable long id, @RequestBody MyEntity newEntity){
-        MyEntity updatedEntity = myRepository.findById(id)
-                .orElseThrow(()-> new ResourceAccessException("Not found MyEntity wih id: "+id));
+    public Broniks putEntity(@PathVariable long id, @RequestBody Broniks newEntity) {
+        Broniks updatedEntity = myRepository.findById(id)
+                .orElseThrow(() -> new ResourceAccessException("Not found Broniks with id: " + id));
         updatedEntity.setName(newEntity.getName());
-        updatedEntity.setAge(newEntity.getAge());
+        updatedEntity.setDescription(newEntity.getDescription());
+        updatedEntity.setImg(newEntity.getImg());
         return myRepository.save(updatedEntity);
     }
 
     @DeleteMapping("/delete/{id}")
-    public void deleteEntity(@PathVariable long id){
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteEntity(@PathVariable long id) {
+        if (!myRepository.existsById(id)) {
+            throw new ResourceAccessException("Not found Broniks with id: " + id);
+        }
         myRepository.deleteById(id);
     }
-
 }
